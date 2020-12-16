@@ -15,9 +15,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '15.x'
+      - name: Merge master -> gh-pages
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: yarn --version
       - run: yarn install
-      - run: yarn build
+      - run: yarn build --out docs
         env:
           CI: true
       - name: Commit changes
@@ -26,8 +32,9 @@ jobs:
           author_name: Egor Laufer
           author_email: laufer@hey.com
           branch: gh-pages
+          pull_strategy: '--autostash'
           message: Deploy to gh pages
-          add: 'dist/ --force'
+          add: 'docs/ --force'
           push: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
