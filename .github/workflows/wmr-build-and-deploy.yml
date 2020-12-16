@@ -17,7 +17,7 @@ jobs:
           node-version: '15.x'
       - run: yarn --version
       - run: yarn install
-      - run: yarn build
+      - run: yarn build --out docs
         env:
           CI: true
       - name: Commit changes
@@ -27,7 +27,7 @@ jobs:
           author_email: laufer@hey.com
           branch: gh-pages
           message: Deploy to gh pages
-          add: 'dist/ --force'
+          add: 'docs/ --force'
           push: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
