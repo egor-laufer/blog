@@ -31,6 +31,7 @@ jobs:
       - run: git checkout gh-pages -f
       - run: rm -rf docs
       - run: mv docs_new docs
+      - run: echo "blog.laufer.dev" > docs/CNAME
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
