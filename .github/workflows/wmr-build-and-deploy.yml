@@ -26,6 +26,7 @@ jobs:
       - run: yarn build --out docs
         env:
           CI: true
+      - run: git fetch -a
       - run: git checkout gh-pages --ours
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
